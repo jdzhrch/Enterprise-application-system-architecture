@@ -13,7 +13,7 @@ public class Product implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-
+ 
 	public double getPrice() {
 		return price;
 	}

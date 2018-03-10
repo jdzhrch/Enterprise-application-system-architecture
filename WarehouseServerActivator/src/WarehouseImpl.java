@@ -1,44 +1,24 @@
+import java.io.IOException;
+import java.rmi.MarshalledObject;
 import java.rmi.RemoteException;
+import java.rmi.activation.Activatable;
+import java.rmi.activation.ActivationID;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Map; 
 
-public class WarehouseImpl extends UnicastRemoteObject implements Warehouse {
-	private Map<String, Product> products;
-	private Warehouse backup;
+public class WarehouseImpl extends Activatable implements Warehouse {
+	private Map<String, Double> prices;
 
-	public WarehouseImpl(Warehouse backup) throws RemoteException {
-		products = new HashMap<>();
-		this.backup = backup;
-	}
-
-	public void add(String keyword, Product product) {
-		product.setLocation(this);
-		products.put(keyword, product);
+	public WarehouseImpl(ActivationID id, MarshalledObject<Map<String, Double>> param)
+			throws RemoteException, ClassNotFoundException, IOException {
+		super(id, 0);
+		prices = param.get();
+		System.out.println("Warehouse implementation constructed.");
 	}
 
 	public double getPrice(String description) throws RemoteException {
-		for (Product p : products.values())
-			if (p.getDescription().equals(description))
-				return p.getPrice();
-		if (backup == null)
-			return 0;
-		else
-			return backup.getPrice(description);
-	}
-
-	public Product getProduct(List<String> keywords) throws RemoteException {
-		for (String keyword : keywords) {
-			Product p = products.get(keyword);
-			if (p != null)
-				return p;
-		}
-		if (backup != null)
-			return backup.getProduct(keywords);
-		else if (products.values().size() > 0)
-			return products.values().iterator().next();
-		else
-			return null;
-	}
+		Double price = prices.get(description);
+		return price == null ? 0 : price;
+	} 
 }

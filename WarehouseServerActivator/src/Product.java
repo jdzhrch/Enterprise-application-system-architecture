@@ -14,7 +14,7 @@ public class Product implements Serializable {
 		return description;
 	}
 
-	public double getPrice() {
+	public double getPrice() { 
 		return price;
 	}
 

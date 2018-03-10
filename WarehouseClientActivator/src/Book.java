@@ -9,4 +9,4 @@ public class Book extends Product {
 	public String getDescription() {
 		return super.getDescription() + " " + isbn;
 	}
-}
+} 
