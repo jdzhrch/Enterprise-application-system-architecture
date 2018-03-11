@@ -1,3 +1,4 @@
+package rmi;
 import java.io.*;
 import java.sql.Date;
 import java.util.HashSet;
@@ -7,7 +8,7 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Order implements Serializable
+public class RmiOrder implements Serializable
 {
 	private int id;
 	  private int userid;
@@ -16,9 +17,9 @@ public class Order implements Serializable
 	  private String address;
 	  private String phone;
 	  
-	  public Order() {}
+	  public RmiOrder() {}
 	  
-	  public Order(int userid, Date date, Date enddate, String address, String phone)
+	  public RmiOrder(int userid, Date date, Date enddate, String address, String phone)
 	  {
 	    this.userid = userid;
 	    this.date = date;
@@ -85,17 +86,5 @@ public class Order implements Serializable
 	  public void setPhone(String phone)
 	  {
 	    this.phone = phone;
-	  }
-	  
-	  private Set<Orderitem> orderitems = new HashSet();
-	  
-	  public Set<Orderitem> getOrderitems()
-	  {
-	    return this.orderitems;
-	  }
-	  
-	  public void setOrderitems(Set<Orderitem> orderitems)
-	  {
-	    this.orderitems = orderitems;
 	  }
 }

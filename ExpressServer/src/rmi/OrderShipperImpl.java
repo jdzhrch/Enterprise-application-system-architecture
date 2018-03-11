@@ -1,3 +1,5 @@
+package rmi;
+
 import java.rmi.*;
 import java.rmi.server.*;
 import java.util.*;
@@ -8,9 +10,10 @@ public class OrderShipperImpl extends UnicastRemoteObject implements OrderShippe
    {
    }
 
-   public String shipOrder(Order order)
+   public String shipOrder(RmiOrder order)
    {     
       return "Processing";
    }
     
 }
+ 

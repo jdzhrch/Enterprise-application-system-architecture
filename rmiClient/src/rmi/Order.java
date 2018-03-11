@@ -1,3 +1,4 @@
+package rmi;
 import java.io.*;
 import java.sql.Date;
 import java.util.HashSet;
@@ -85,17 +86,5 @@ public class Order implements Serializable
 	  public void setPhone(String phone)
 	  {
 	    this.phone = phone;
-	  }
-	  
-	  private Set<Orderitem> orderitems = new HashSet();
-	  
-	  public Set<Orderitem> getOrderitems()
-	  {
-	    return this.orderitems;
-	  }
-	  
-	  public void setOrderitems(Set<Orderitem> orderitems)
-	  {
-	    this.orderitems = orderitems;
 	  }
 }

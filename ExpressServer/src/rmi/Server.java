@@ -1,3 +1,5 @@
+package rmi;
+
 import java.rmi.*;
 import javax.naming.*;
 
@@ -15,3 +17,4 @@ public class Server
       System.out.println("Waiting for invocations from clients...");
    }
 }
+  
