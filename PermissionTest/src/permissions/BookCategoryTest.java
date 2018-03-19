@@ -44,7 +44,7 @@ class PermissionTestFrame extends JFrame
       textField = new JTextField(20);
       JPanel panel = new JPanel();
       panel.add(textField);
-      JButton openButton = new JButton("Insert");
+      JButton openButton = new JButton("access");
       panel.add(openButton);
       openButton.addActionListener(new ActionListener()
          {
