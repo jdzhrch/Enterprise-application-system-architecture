@@ -1,0 +1,4 @@
+grant 
+{  
+   permission permissions.BookCategoryPermission "a,b/c,d", "access";   
+};
