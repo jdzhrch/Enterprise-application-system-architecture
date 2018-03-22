@@ -1,0 +1,4 @@
+grant 
+{  
+   permission model.BookCategoryPermission "a,b/c,d", "access";   
+};

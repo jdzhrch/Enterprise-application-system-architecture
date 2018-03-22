@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Struts2 DTD -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.devMode" value="true" />
+	<package name="process" extends="struts-default">
+		<!-- Book -->
+		<action name="*BookPro" class="action.BookAction" method="{1}">
+			<result name="success">/bookstore/jsp/book.jsp</result>
+			<result name="deal">/bookstore/jsp/homepage.jsp</result>
+			<result name="search success">/bookstore/jsp/homepage.jsp</result>
+			<result name="back">/bookstore/jsp/back.jsp</result>
+		</action>
+
+		<!-- Order -->
+		<action name="*OrderPro" class="action.OrderAction" method="{1}">
+			<result name="success">/bookstore/jsp/order.jsp</result>
+			<result name="deal">/bookstore/jsp/homepage.jsp</result>
+		</action>
+
+		<!-- Orderitem -->
+		<action name="*OrderitemPro" class="action.OrderitemAction" method="{1}">
+			<result name="success">/bookstore/jsp/orderitem.jsp</result>
+		</action>
+
+		<!-- User -->
+		<action name="*UserPro" class="action.UserAction" method="{1}">
+			<result name="success">/bookstore/jsp/user.jsp</result>
+			<result name="register success">/bookstore/jsp/homepage.jsp</result>
+			<result name="register error">/bookstore/jsp/message.jsp</result>
+			<result name="login error">/bookstore/jsp/message.jsp</result>
+			<result name="login success">/bookstore/jsp/homepage.jsp</result>
+			<result name="logout success">/bookstore/jsp/homepage.jsp</result>
+			<result name="cart">/bookstore/jsp/cart.jsp</result>
+		</action>
+		
+		<!-- Homepage -->
+		<action name="HomepagePro" class="action.BookAction" method="all">
+			<result name="success">/bookstore/jsp/homepage.jsp</result>
+		</action>
+		<!-- Statistic -->
+		<action name="*StatisticPro" class="action.StatisticAction" method="{1}">
+			<result name="success">/bookstore/jsp/statistics.jsp</result>
+		</action>
+		<action name="*">
+			<result>/{1}.jsp</result>
+		</action>
+	</package>
+</struts>
