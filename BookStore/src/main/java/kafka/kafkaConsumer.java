@@ -28,6 +28,16 @@ public class kafkaConsumer {
 		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
 		consumer.subscribe(Arrays.asList("topic1"));
+
+		Connection conn = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");// 加载驱动类
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "zhrch0376");// （url数据库的IP地址，user数据库用户名，password数据库密码）
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(conn);
+
 		while (true) {
 			ConsumerRecords<String, String> records = consumer.poll(100);
 			for (ConsumerRecord<String, String> record : records) {
@@ -38,15 +48,6 @@ public class kafkaConsumer {
 				int amount = Integer.parseInt(ss[2]);
 				int orderitemprice = Integer.parseInt(ss[3]);
 				Orderitem oi = new Orderitem(orderid, bookid, amount, orderitemprice);
-
-				Connection conn = null;
-				try {
-					Class.forName("com.mysql.jdbc.Driver");// 加载驱动类
-					conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "zhrch0376");// （url数据库的IP地址，user数据库用户名，password数据库密码）
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				System.out.println(conn);
 
 				PreparedStatement ps = null;
 				String sql = "insert into orderitems(orderid,bookid,amount,orderitemPrice)" + "values('" + ss[0]
