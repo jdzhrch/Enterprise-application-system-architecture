@@ -7,6 +7,7 @@
 <%@ page import="model.User"%>
 <%@ page import="model.Order"%>
 <%@ page import="model.Orderitem"%>
+<%@ page import="cipher.AESCipher"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -53,6 +54,8 @@ String path = request.getContextPath();
 			cart_orderitems = orderitemses.get(cart_index);
 			cart_books = bookses.get(cart_index);
 		}
+		String cart_orderid =AESCipher.AESEncode(Integer.toString(cart_order.getId()));
+		String cart_orderuserid = AESCipher.AESEncode(Integer.toString(cart_order.getUserid()));
 	%>
 <body id="top">
   <header id="home">
@@ -105,7 +108,7 @@ String path = request.getContextPath();
         </div>
     </section>
   </header>
-  
+   
   <!-- cart -->
   <%
   	if(request.getAttribute("cart_index") != null && cart_orderitems.size()>0){
@@ -139,25 +142,25 @@ String path = request.getContextPath();
 						<div class="col-lg-12">
 				     		<form id="cart_deal_form" role="form" action="dealOrderPro" method="post">
 								<div class="form-group" hidden>
-									<input class="form-control" name="id" value=<%=cart_order.getId() %>>
+									<input class="form-control" name="cart_orderid" value=<%=cart_orderid %>>
 								</div>
 								<div class="form-group"  hidden>
-									<input class="form-control" name="userid" value=<%=cart_order.getUserid() %>>
+									<input class="form-control" name="cart_orderuserid" value=<%=cart_orderuserid %>>
 								</div>
 								<%
 									SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 									String date = df.format(new Date());
 								%>
 								<div class="form-group"  hidden>
-									<input class="form-control" name="date" value=<%=date %>>
+									<input id="cart_orderdate"class="form-control" name="date" value=<%=date %>>
 								</div>
 								<div class="form-group" >
 									<label >Address</label>
-									<input class="form-control" name="address" >
+									<input id="cart_orderaddress"class="form-control" name="address" >
 								</div>
 								<div class="form-group">
 									<label >Phone</label>
-									<input class="form-control" name="phone" >
+									<input id="cart_orderphone"class="form-control" name="phone" >
 								</div>
 							</form>  
 						</div>
@@ -169,6 +172,7 @@ String path = request.getContextPath();
 			</div>
 		</div>
 	</div> 
+	
           <h3><Button class="btn btn-default" onclick="javascript:$('#modal-order').modal('show');">Deal </Button></h3>
           
           <div class="features-wrapper">

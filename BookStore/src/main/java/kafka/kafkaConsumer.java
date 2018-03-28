@@ -29,14 +29,7 @@ public class kafkaConsumer {
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(props);
 		consumer.subscribe(Arrays.asList("topic1"));
 
-		Connection conn = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");// 加载驱动类
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "zhrch0376");// （url数据库的IP地址，user数据库用户名，password数据库密码）
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(conn);
+		
 
 		while (true) {
 			ConsumerRecords<String, String> records = consumer.poll(100);
@@ -48,12 +41,21 @@ public class kafkaConsumer {
 				int amount = Integer.parseInt(ss[2]);
 				int orderitemprice = Integer.parseInt(ss[3]);
 				Orderitem oi = new Orderitem(orderid, bookid, amount, orderitemprice);
-
+				
+				
 				PreparedStatement ps = null;
 				String sql = "insert into orderitems(orderid,bookid,amount,orderitemPrice)" + "values('" + ss[0]
 						+ "','" + ss[1] + "','" + ss[2] + "','" + ss[3] + "')";
 				System.out.println(sql);
 				try {
+					Connection conn = null;
+					try {
+						Class.forName("com.mysql.jdbc.Driver");// 加载驱动类
+						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bookstore", "root", "zhrch0376");// （url数据库的IP地址，user数据库用户名，password数据库密码）
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					System.out.println(conn);
 					ps = conn.prepareStatement(sql);// 把写好的sql语句传递到数据库，让数据库知道我们要干什么
 					int a = ps.executeUpdate();// 这个方法用于改变数据库数据，a代表改变数据库的条数
 					if (a > 0) {
@@ -61,19 +63,16 @@ public class kafkaConsumer {
 					} else {
 						System.out.println("添加失败");
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				try {
 					if (ps != null) {
 						ps.close();
 					}
 					if (conn != null) {
 						conn.close();
 					}
-				} catch (Exception e2) {
-					e2.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
+					
 			}
 		}
 	}

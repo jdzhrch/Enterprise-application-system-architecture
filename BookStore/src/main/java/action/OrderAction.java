@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 
+import cipher.AESCipher;
+
 import model.Book;
 import model.Order;
 import model.User;
@@ -28,6 +30,8 @@ public class OrderAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private int userid;
+	private String cart_orderid;
+	private String cart_orderuserid;
 	private Date date;
 	private Date enddate;
 	private String address;
@@ -126,6 +130,10 @@ public class OrderAction extends BaseAction {
 	}
 
 	public String deal() throws Exception {
+		this.id = Integer.parseInt(AESCipher.AESDncode(this.cart_orderid));
+		this.userid = Integer.parseInt(AESCipher.AESDncode(this.cart_orderuserid));
+		System.out.println("orderid"+Integer.parseInt(AESCipher.AESDncode(this.cart_orderid)));
+		System.out.println("userid"+Integer.parseInt(AESCipher.AESDncode(this.cart_orderuserid)));
 		Order order = this.appService.getOrderById(this.id);
 		order.setUserid(this.userid);
 		order.setDate(this.date);
@@ -157,5 +165,21 @@ public class OrderAction extends BaseAction {
 
 	public String showStatistics() throws Exception {
 		return "statistics";
+	}
+
+	public String getCart_orderuserid() {
+		return cart_orderuserid;
+	}
+
+	public void setCart_orderuserid(String cart_orderuserid) {
+		this.cart_orderuserid = cart_orderuserid;
+	}
+
+	public String getCart_orderid() {
+		return cart_orderid;
+	}
+
+	public void setCart_orderid(String cart_orderid) {
+		this.cart_orderid = cart_orderid;
 	}
 }
