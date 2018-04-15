@@ -12,6 +12,7 @@ public class OrderShipperImpl extends UnicastRemoteObject implements OrderShippe
 
    public String shipOrder(RmiOrder order)
    {     
+	   System.out.println("process success");
       return "Processing";
    }
     

@@ -179,6 +179,7 @@ String path = request.getContextPath();
            <%
 				for (int i = 0; i < cart_books.size(); i++) {
 													Book book = cart_books.get(i);
+													if(book.getStock()-cart_orderitems.get(i).getAmount()>0){
 			%>
 			    
 				<form id="book_deal_form" role="form" action="dealBookPro" method="post" hidden>
@@ -201,6 +202,7 @@ String path = request.getContextPath();
             </div>
             
 			<%
+													}
 				}
 			%>
             <div class="clearfix"></div>

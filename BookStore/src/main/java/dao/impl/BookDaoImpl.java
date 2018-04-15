@@ -5,7 +5,10 @@ import java.util.List;
 import model.Book;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class BookDaoImpl
   extends HibernateDaoSupport
   implements BookDao

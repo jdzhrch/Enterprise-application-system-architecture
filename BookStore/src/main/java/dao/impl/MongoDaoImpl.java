@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -14,6 +16,7 @@ import com.mongodb.gridfs.GridFSInputFile;
 
 import dao.MongoDao;
 
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class MongoDaoImpl implements MongoDao{
 	private MongoTemplate mongoTemplate;
 
@@ -25,6 +28,7 @@ public class MongoDaoImpl implements MongoDao{
 		this.mongoTemplate = mongoTemplate;
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED)
 	@Override
 	public void savePicture(String fileName, File imageFile) throws IOException {
 		DB db = mongoTemplate.getDb();
@@ -40,6 +44,7 @@ public class MongoDaoImpl implements MongoDao{
 		}
 	}
 
+	@Transactional(propagation=Propagation.REQUIRED)
 	@Override
 	public void deletePicture(String fileName) {
 		DB db = mongoTemplate.getDb();

@@ -8,11 +8,14 @@ import org.hibernate.SQLQuery;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import dao.StatisticDao;
 import model.Book;
 import model.Statistic;
 
+@Transactional(propagation=Propagation.NOT_SUPPORTED)//因为管理员只有一个，且在这里数据只是显示，本身就随时间变化很大。
 public class StatisticDaoImpl 
 	extends HibernateDaoSupport
 	implements StatisticDao

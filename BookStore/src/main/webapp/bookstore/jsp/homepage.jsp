@@ -58,6 +58,8 @@
 										class="fa fa-angle-right"></i></span></a></li>
 							<li><a href="#books">Books <span class="indicator"><i
 										class="fa fa-angle-right"></i></span></a></li>
+							<li><a href="bookstore/jsp/chatroom.jsp">Chatroom <span class="indicator"><i
+										class="fa fa-angle-right"></i></span></a></li>
 							<%
 								if (account != null) {
 									if (account.getRole().equals("admin")) {

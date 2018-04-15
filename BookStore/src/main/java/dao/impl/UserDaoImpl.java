@@ -5,21 +5,27 @@ import java.util.List;
 import model.User;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation=Propagation.REQUIRES_NEW)
 public class UserDaoImpl
   extends HibernateDaoSupport
   implements UserDao
 {
+	@Transactional(propagation=Propagation.REQUIRED)
   public Integer save(User user)
   {
     return (Integer)getHibernateTemplate().save(user);
   }
-  
+
+	@Transactional(propagation=Propagation.REQUIRED)
   public void delete(User user)
   {
     getHibernateTemplate().delete(user);
   }
-  
+
+	@Transactional(propagation=Propagation.REQUIRED)
   public void update(User user)
   {
     getHibernateTemplate().merge(user);
