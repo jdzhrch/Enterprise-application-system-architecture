@@ -7,6 +7,19 @@
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<constant name="struts.devMode" value="true" />
 	<package name="process" extends="struts-default">
+		<!-- 配置拦截器 -->
+        <interceptors>
+            <!-- 定义xss拦截器 -->
+            <interceptor name="xssInterceptor" class="xssInterceptor.XSSInterceptor"></interceptor>
+            <!-- 定义一个包含xss拦截的拦截栈 -->
+            <interceptor-stack name="myDefault">
+                <interceptor-ref name="xssInterceptor"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <!-- 这个必须配置，否则拦截器不生效 -->
+        <default-interceptor-ref name="myDefault"></default-interceptor-ref>
+        
 		<!-- Book -->
 		<action name="*BookPro" class="action.BookAction" method="{1}">
 			<result name="success">/bookstore/jsp/book.jsp</result>
