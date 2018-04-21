@@ -6,6 +6,7 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	<package name="process" extends="struts-default">
 		<!-- 配置拦截器 -->
         <interceptors>
