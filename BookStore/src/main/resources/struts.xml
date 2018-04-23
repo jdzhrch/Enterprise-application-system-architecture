@@ -61,6 +61,12 @@
 		<action name="HomepagePro" class="action.BookAction" method="all">
 			<result name="success">/bookstore/jsp/homepage.jsp</result>
 		</action>
+		
+		<!-- Homepage -->
+		<action name="*homePro" class="action.BookAction" method="{1}">
+			<result name="success">/bookstore/jsp/homepage.jsp</result>
+		</action>
+		
 		<!-- Statistic -->
 		<action name="*StatisticPro" class="action.StatisticAction" method="{1}">
 			<result name="success">/bookstore/jsp/statistics.jsp</result>
