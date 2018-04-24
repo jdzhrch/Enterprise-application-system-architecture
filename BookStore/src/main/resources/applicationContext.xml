@@ -12,7 +12,10 @@
 	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 	http://www.springframework.org/schema/data/mongo 
 	http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
-
+	
+	<!--aop aspectJ 用于log-->
+	<aop:aspectj-autoproxy/>  
+    <bean id = "inter" class = "aop.AopInterceptor"></bean>  
 
 	<mongo:mongo host="localhost" port="27017" id="mongo">
     </mongo:mongo>   
